@@ -3,12 +3,12 @@ use strict;
 use warnings;
 
 my %users_prms = (
-    "Mike" => "123",
-    "Jack" => "123",
-    "Kek"  => "123"
+    'Mike' => '123',
+    'Jack' => '123',
+    'Kek'  => '123'
 );
 
-print "Enter name: ";
+print 'Enter name: ';
 my $user = %ENV{ user_name };
 my $user_password = %ENV{ user_password };
 
@@ -21,5 +21,5 @@ if ( defined($user_passwd)  && $user_passwd == $user_password) {
     print "Добро пожаловать '$user'!";
 }
 else {
-    print "Неверный логин или пароль.";
+    print 'Неверный логин или пароль.';
 }
