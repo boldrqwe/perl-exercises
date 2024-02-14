@@ -5,13 +5,13 @@ use strict;
 use warnings;
 
 
-my @users_list = ( "Mike", "Jack", "Kek" );
+my @users_list = ( 'Mike', 'Jack', 'Kek' );
 
 # foreach my $arg (@ARGV) {
 #     print "argument: $arg\n";
 # }
 
-print "Enter name: ";
+print 'Enter name: ';
 my $user = %ENV{ user_name };
 my $user_passwd = %ENV{ user_passwd };
 
