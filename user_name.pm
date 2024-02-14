@@ -12,15 +12,15 @@ my @users_list = ( "Mike", "Jack", "Kek" );
 # }
 
 print "Enter name: ";
-my $user = %ENV{user_name};
-my $user_passwd = %ENV{user_passwd};
+my $user = %ENV{ user_name };
+my $user_passwd = %ENV{ user_passwd };
 
 chomp($user);
 
 my $find = 0;
 
 
-for my $user_name(@users_list){
+for my $user_name( @users_list ){
     if ( $user eq $user_name ) {
         $find = 1;
         last;
