@@ -1,18 +1,19 @@
 #!/usr/bin/perl
 use strict;
 use warnings FATAL => 'all';
-print('enter total tickets');
+use POSIX;
+print('введите количество тикетов');
 my $total_tickets = <STDIN>;
-print('enter tickets in day');
+print('введите количество тикетов в день');
 my $tickets_in_day = <STDIN>;
-print('enter tickets_come_in_day');
+print('введите количество тикетов поступающих в день');
 my $tickets_come_in_day = <STDIN>;
 
 my $sprint_value = 10;
 my $delta = $tickets_in_day - $tickets_come_in_day;
-my $days = sprintf("%.0f", $total_tickets / $tickets_in_day);
-my $sprints = sprintf("%.0f", $days / $sprint_value);
+my $days = ceil($total_tickets / $tickets_in_day);
+my $sprints = ceil($days / $sprint_value);
 
-my $result = $delta < 0 ? 'no, he can`t' : "will handle it in $sprints  sprints";
+my $result = $delta < 0 ? 'не сможет' : "сможет за  $sprints  спринтов";
 
 print($result);
