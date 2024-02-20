@@ -11,6 +11,31 @@ sub print_hash {
     }
 }
 
+sub login {
+    my ( $self ) = @_;
+
+}
+sub reg_user {
+    my ($hash1_ref, $hash2_ref, $path) = @_;  # Получаем ссылки на хеши
+    my %new_user_password = %$hash1_ref;  # Разыменование ссылки для получения хеша
+    my %config = %$hash2_ref;
+
+    my @arr = keys( %new_user_password );
+    my $new_user = $arr[0];
+    my $existing_user = $config{$new_user};
+    if ( defined( $existing_user ) ) {
+        die 'такой пользователь уже зарегистрирован'
+    }
+    add_line_to_file( $path, "$new_user=$new_user_password{$new_user}" )
+}
+
+sub add_line_to_file {
+    my ( $path, $new_line ) = @_;
+    open( my $fh, '>>', $path ) or die "Не удалось открыть файл '$path' $!";
+    print $fh "$new_line\n";
+    close( $fh );
+}
+
 sub read_conf {
     my ( $p ) = @_;
     chomp( $p );
@@ -35,6 +60,7 @@ sub get_hash {
             next;
         }
         $array_element =~ s/ //g;
+        chomp( $array_element );
         my @split = split /=/, $array_element;
 
         if ( @split > 1 ) {
@@ -44,13 +70,4 @@ sub get_hash {
     return %hash;
 }
 
-sub change_hash {
-    my ( %hash_map, %check_user) = @_;
-    foreach my $key ( keys %hash_map ) {
-        my $user_password = $check_user{$key};
-        if ( defined( $user_password ) ) {
-            $check_user{$key} = $hash_map{$key};
-        }
-    }
-}
 1;
