@@ -3,6 +3,7 @@ use strict;
 use warnings FATAL => 'all';
 use FindBin;
 use File::Spec;
+use lib "$FindBin::Bin/lib";
 use tools;
 
 my $file_name = 'conf.ini';

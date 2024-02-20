@@ -11,7 +11,6 @@ sub print_hash {
     }
 }
 
-
 sub read_conf {
     my ( $p ) = @_;
     chomp( $p );
