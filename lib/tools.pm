@@ -61,9 +61,6 @@ sub get_hash {
     my %hash;
     for ( my $i = 0 ; $i < @array ; $i++ ) {
         my $array_element = $array[$i];
-        if ( $array_element =~ /#/ ) {
-            next;
-        }
         $array_element =~ s/ //g;
         chomp( $array_element );
         my @split = split /=/, $array_element;
@@ -86,6 +83,26 @@ sub del {
         chomp( $line );
         if ( $line =~ /^\Q$user_name\E\s*=/ ) {
             next;
+        }
+        else {
+            print $fh $line . "\n";
+        }
+    }
+
+    close( $fh );
+}
+
+sub change_password {
+    my ( $user_name, $new_password, $path ) = @_;
+    my @lines = read_conf( $path );
+
+    open( my $fh, '>', $path ) or die "Can't write to path $path: $!";
+
+    foreach my $line ( @lines ) {
+        chomp( $line );
+        if ( $line =~ /^\Q$user_name\E\s*=/ ) {
+            $line =~ s/=(.*)$/'= ' . $new_password/e;
+            print $fh $line . "\n";
         }
         else {
             print $fh $line . "\n";

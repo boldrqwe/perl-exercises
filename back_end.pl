@@ -6,11 +6,12 @@ use File::Spec;
 use lib "$FindBin::Bin/lib";
 use tools;
 
-my $action = 'del';
+my $action = 'change_passwd';
 my %new_user = (
     'Jap1' => 'kekddddd!'
 );
 my $user_name = 'Jack';
+my $new_password = '1223';
 
 if ( $action eq 'log' ) {
     tools::login;
@@ -26,7 +27,11 @@ if ( $action eq 'reg' ) {
     tools::reg_user( \%new_user, \%hash_map_from_config, $path );
 }
 if ( $action eq 'del' ) {
-    tools::del($user_name, $path);
+    tools::del( $user_name, $path );
+}
+
+if ( $action eq 'change_passwd' ) {
+    tools::change_password( $user_name, $new_password, $path );
 }
 
 my @arr2 = tools::read_conf( $path );
