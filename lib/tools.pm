@@ -94,6 +94,8 @@ sub del {
 
 sub change_password {
     my ( $user_name, $new_password, $path ) = @_;
+
+    _check_user_passwd($new_password);
     my @lines = read_conf( $path );
 
     open( my $fh, '>', $path ) or die "Can't write to path $path: $!";
