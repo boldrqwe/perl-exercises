@@ -8,7 +8,7 @@ use tools;
 
 my $action = 'reg';
 my %new_user = (
-    'Jaj' => 'kek'
+    'Jap' => 'kekddddd!'
 );
 
 if ( $action eq 'log' ) {
