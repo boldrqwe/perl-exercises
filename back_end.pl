@@ -6,12 +6,32 @@ use File::Spec;
 use lib "$FindBin::Bin/lib";
 use tools;
 
-my $action = 'change_passwd';
-my %new_user = (
-    'Jap1' => 'kekddddd!'
-);
-my $user_name = 'Jack';
-my $new_password = '1223';
+sub _print_help {
+    print << 'HELP';
+######################################################
+# back_end.pl usage
+# ./back_end.pl action=reg user_name=NAME user_passwd=PASSWD - registration new user in system;
+# ./back_end.pl action=log user_name=NAME user_passwd=PASSWD - login in system;
+# ./back_end.pl action=del user_name=NAME - remove user from system;
+# ./back_end.pl action=change_passwd user_name=NAME user_passwd=PASSWD - change user password;
+######################################################
+HELP
+}
+my %args;
+foreach my $arg (@ARGV) {
+    my ($key, $value) = split /=/, $arg, 2;
+    $args{$key} = $value if defined $value;
+}
+
+unless (exists $args{action} && exists $args{user_name}) {
+    _print_help();
+    exit;
+}
+
+my $action = $args{action};
+my $user_name = $args{user_name};
+my $user_passwd = $args{user_passwd};
+my %new_user = ($args{user_name} => $args{$user_passwd});
 
 if ( $action eq 'log' ) {
     tools::login;
@@ -31,7 +51,7 @@ if ( $action eq 'del' ) {
 }
 
 if ( $action eq 'change_passwd' ) {
-    tools::change_password( $user_name, $new_password, $path );
+    tools::change_password( $user_name, $user_passwd, $path );
 }
 
 my @arr2 = tools::read_conf( $path );
