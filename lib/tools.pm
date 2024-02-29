@@ -103,7 +103,7 @@ sub change_password {
     foreach my $line ( @lines ) {
         chomp( $line );
         if ( $line =~ /^\Q$user_name\E\s*=/ ) {
-            $line =~ s/=(.*)$/'= ' . $new_password/e;
+            $line =~ s/=(.*)$/'=' . $new_password/e;
             print $fh $line . "\n";
         }
         else {
