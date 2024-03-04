@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+    <book id="3">
+        <title>Super puper</title>
+        <author>James Joys</author>
+        <year>1922</year>
+        <genre>fantasy</genre>
+    </book>
+</library>
